@@ -19,7 +19,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className="flex min-h-screen flex-col antialiased font-sans">
+      <head>
+        {/* Permite fuentes de Google si algún script las solicita (p. ej. en GitHub Pages) */}
+        <meta
+          httpEquiv="Content-Security-Policy"
+          content="style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:;"
+        />
+      </head>
+      <body className="flex min-h-screen flex-col antialiased font-app">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
