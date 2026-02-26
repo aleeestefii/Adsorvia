@@ -17,17 +17,18 @@ import {
   impactoEnergetico,
   impactoEconomico,
   waterfallData,
+  intensidadEnergetica,
   reduccionCo2,
   programa12Plantas,
   cumplimientoBonoVerde,
 } from "../../lib/mockData";
 
 export default function DashboardEjecutivoPage() {
-  const intensidadChartData = [
-    { periodo: "2023", "kWh/L antes": 0.068, "kWh/L después": null },
-    { periodo: "2024", "kWh/L antes": 0.067, "kWh/L después": 0.048 },
-    { periodo: "2025", "kWh/L antes": null, "kWh/L después": 0.046 },
-  ];
+  const intensidadChartData = intensidadEnergetica.map(({ periodo, antes, despues }) => ({
+    periodo,
+    "kWh/L antes": antes,
+    "kWh/L después": despues,
+  }));
 
   const co2BarData = [
     { tipo: "Scope 2 antes", valor: reduccionCo2.scope2Antes, fill: "#ebebeb" },

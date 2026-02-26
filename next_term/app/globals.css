@@ -13,6 +13,10 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--nextherm-orange);
+  --color-muted: var(--nextherm-gray);
+  --color-accent: var(--nextherm-teal);
+  --color-dark: var(--nextherm-dark);
   --color-nextherm-orange: #FF5B04;
   --color-nextherm-gray: #ebebeb;
   --color-nextherm-teal: #075056;

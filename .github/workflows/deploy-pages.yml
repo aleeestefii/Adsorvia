@@ -1,4 +1,7 @@
-name: Deploy to GitHub Pages
+# Deploy from a branch: build Next.js static export and push to gh-pages.
+# In repo Settings > Pages > Source: Deploy from a branch > Branch: gh-pages > Folder: / (root).
+
+name: Deploy to GitHub Pages (branch)
 
 on:
   push:
@@ -6,7 +9,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -15,7 +18,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -34,26 +37,10 @@ jobs:
           npm ci
           npm run build
 
-      - name: Prepare artifact for GitHub Pages (basePath /Adsorvia)
-        run: |
-          mkdir -p deploy/Adsorvia
-          cp -r next_term/out/* deploy/Adsorvia/
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      # Next.js static export with basePath puts index.html and _next in out/; deploy to gh-pages root.
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: deploy
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: next_term/out
+          force_orphan: true

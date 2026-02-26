@@ -28,29 +28,15 @@ npm install
 npm run build
 ```
 
-La salida está en la carpeta **`out/`**. El build usa `basePath: '/Adsorvia'` en producción; al desplegar en GitHub Pages, el contenido de `out/` debe quedar dentro de una carpeta **Adsorvia** en la raíz del artifact (el workflow lo hace automáticamente).
+La salida está en la carpeta **`out/`**. El build usa `basePath: '/Adsorvia'` en producción para que la URL del sitio sea `https://<usuario>.github.io/Adsorvia/`.
 
-## Publicar en GitHub Pages
-
-### Opción 1: GitHub Actions (recomendado)
+## Publicar en GitHub Pages (Deploy from a branch)
 
 1. En el repositorio, ve a **Settings → Pages**.
-2. En **Source** elige **GitHub Actions**.
-3. El workflow en `.github/workflows/deploy-pages.yml` (en la raíz del repo) hace build de `next_term` y publica la carpeta `next_term/out` en la rama `gh-pages`. Tras cada push en `main`, se despliega automáticamente.
-4. La URL del sitio será: `https://<usuario>.github.io/Adsorvia/`.
-
-### Opción 2: Publicación manual
-
-1. Ejecuta en tu máquina:
-   ```bash
-   cd next_term
-   npm ci
-   npm run build
-   ```
-2. En **Settings → Pages** del repo, elige la rama **gh-pages** y la carpeta **/ (root)**.
-3. Copia el contenido de `next_term/out` a la rama `gh-pages` (por ejemplo con un script que haga push de `out` a `gh-pages`).
-
-Si usas la raíz del repo para Pages en lugar de `gh-pages`, tendrías que servir el contenido de `next_term/out` desde la raíz; en ese caso la estructura de `out` (con subcarpeta `Adsorvia`) debe quedar en la raíz de la rama que sirve Pages.
+2. En **Build and deployment** > **Source** elige **Deploy from a branch**.
+3. Elige la rama **gh-pages** y la carpeta **/ (root)**.
+4. El workflow `.github/workflows/deploy-pages.yml` hace build de `next_term` y sube el contenido de `next_term/out` a la rama `gh-pages`. Tras cada push en `main` o `master`, se actualiza el sitio.
+5. La URL del sitio será: `https://<usuario>.github.io/Adsorvia/`.
 
 ## Tecnologías
 
