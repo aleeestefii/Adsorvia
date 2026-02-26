@@ -5,25 +5,34 @@ import CasoPropuesta from "./components/CasoPropuesta";
 export default function Home() {
   return (
     <div className="bg-[#ebebeb]/40">
-      <section className="bg-[#16232A] px-4 py-16 text-white md:py-24">
-        <div className="mx-auto max-w-6xl md:px-6">
-          <div className="flex flex-col items-center gap-8 md:flex-row md:items-center md:justify-between">
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
+      {/* Hero */}
+      <section className="relative overflow-hidden bg-[#16232A] px-4 py-20 text-white md:py-28">
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)", backgroundSize: "32px 32px" }} />
+        <div className="relative mx-auto max-w-6xl md:px-6">
+          <div className="flex flex-col items-center gap-12 lg:flex-row lg:items-center lg:justify-between lg:gap-16">
+            <div className="max-w-xl text-center lg:text-left">
+              <span className="inline-block rounded-full border border-[#FF5B04]/60 bg-[#FF5B04]/10 px-4 py-1.5 text-sm font-medium text-[#FF5B04]">
+                Eficiencia energética industrial
+              </span>
+              <h1 className="mt-6 text-3xl font-bold leading-tight tracking-tight md:text-4xl lg:text-5xl">
                 Recuperación térmica para frío sostenible
               </h1>
-              <p className="mt-4 max-w-xl text-lg text-[#ebebeb]">
-                Monitoreo de eficiencia energética y reducción de emisiones en
-                plantas industriales.
+              <p className="mt-6 text-lg leading-relaxed text-[#ebebeb] md:text-xl">
+                Transformamos el calor residual de procesos industriales en capacidad de enfriamiento útil, reduciendo consumo eléctrico y emisiones en plantas como las de Arca Continental.
+              </p>
+              <p className="mt-4 text-base text-[#ebebeb]/80">
+                Monitoreo en tiempo real, impacto medible y alineado a Bonos Verdes.
               </p>
             </div>
-            <Image
-              src="/logo-full.png"
-              alt="NexTherm – Thermal Recovery"
-              width={280}
-              height={100}
-              className="shrink-0"
-            />
+            <div className="shrink-0">
+              <Image
+                src="/logo-full.png"
+                alt="NexTherm – Thermal Recovery"
+                width={300}
+                height={110}
+                className="drop-shadow-lg"
+              />
+            </div>
           </div>
         </div>
       </section>
