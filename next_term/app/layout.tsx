@@ -17,14 +17,40 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const blockGoogleFontsScript = `
+(function() {
+  var createElement = document.createElement.bind(document);
+  document.createElement = function(tagName) {
+    var el = createElement(tagName);
+    if (tagName.toLowerCase() === 'link') {
+      var origSetAttribute = el.setAttribute.bind(el);
+      el.setAttribute = function(name, value) {
+        if (name === 'href' && typeof value === 'string' && value.indexOf('fonts.googleapis.com') !== -1) return;
+        return origSetAttribute(name, value);
+      };
+      var desc = Object.getOwnPropertyDescriptor(HTMLLinkElement.prototype, 'href');
+      if (desc && desc.set) {
+        var origSet = desc.set;
+        Object.defineProperty(el, 'href', {
+          set: function(v) {
+            if (typeof v === 'string' && v.indexOf('fonts.googleapis.com') !== -1) return;
+            origSet.call(this, v);
+          },
+          get: desc.get,
+          configurable: true,
+          enumerable: desc.enumerable
+        });
+      }
+    }
+    return el;
+  };
+})();
+`;
+
   return (
     <html lang="es">
       <head>
-        {/* Permite fuentes de Google si algún script las solicita (p. ej. en GitHub Pages) */}
-        <meta
-          httpEquiv="Content-Security-Policy"
-          content="style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:;"
-        />
+        <script dangerouslySetInnerHTML={{ __html: blockGoogleFontsScript }} />
       </head>
       <body className="flex min-h-screen flex-col antialiased font-app">
         <Header />
