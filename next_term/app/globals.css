@@ -19,7 +19,11 @@
   --color-nextherm-dark: #16232A;
 }
 
+<<<<<<< Updated upstream
 /* Solo fuentes del sistema: evita cargar Google Fonts y respeta CSP de GitHub Pages */
+=======
+/* Solo fuentes del sistema; evita depender de fuentes externas (CSP en GitHub Pages) */
+>>>>>>> Stashed changes
 .font-app,
 body {
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
